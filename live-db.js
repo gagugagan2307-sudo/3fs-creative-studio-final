@@ -89,7 +89,8 @@
       try{
         status('saving','Saving to shared database…');
         const stamp=new Date().toISOString();
-        const r=await client.from('threefs_state').upsert({id:1,data:obj,updated_at:stamp},{onConflict:'id'});
+        const uid=client.auth?.getUser ? (await client.auth.getUser()).data?.user?.id : null;
+        const r=await client.from('threefs_state').upsert({id:1,data:obj,updated_at:stamp,updated_by:uid||null},{onConflict:'id'});
         if(r.error)throw r.error;
         localStorage.setItem('3fsLastSyncedAt',String(new Date(stamp).getTime()));
         localStorage.removeItem('3fsPendingWrite');
