@@ -106,5 +106,9 @@
   };
   window._3fsRefreshLive=async function(){return pull();};
   window.addEventListener('3fs:datachanged',e=>{if(window._3fsPushLive&&e.detail?.store)window._3fsPushLive(e.detail.store);});
-  setInterval(()=>{if(ready)pull();},15000);
+  setInterval(async()=>{
+    if(!client && configured()){ await window.init3FSLiveSync(); return; }
+    if(client && !authReady){ const ok=await ensureAuth(); if(ok && !ready) await window.init3FSLiveSync(); return; }
+    if(ready) pull();
+  },15000);
 })();

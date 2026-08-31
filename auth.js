@@ -37,6 +37,12 @@
   }
 
   supabaseReady=initSupabaseAuth();
+  authRetryTimer=setInterval(async()=>{
+    if(supabaseClient && !(await supabaseClient.auth.getSession())?.data?.session){
+      const ok=await initSupabaseAuth();
+      if(ok) window.dispatchEvent(new CustomEvent('3fs:authchange',{detail:{user:loggedIn?profile:null,profile:loggedIn?profile:null}}));
+    }
+  },15000);
 
   function mount(){
     if(document.getElementById('threefs-login')) return;

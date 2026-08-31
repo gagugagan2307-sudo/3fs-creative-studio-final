@@ -1,6 +1,6 @@
 // 3FS Supabase configuration
-// Browser-safe publishable key only. Never use a service-role/secret key here.
+// Browser-safe publishable key only. This points to the 3fs-creative-studio project.
 window.SUPABASE_CONFIG = {
-  url: 'https://laffwurvntlqgkaaxtmr.supabase.co',
-  publishableKey: 'sb_publishable_Z-aXVaOxPpwIKVo5J_Hlmw__MjX8ARe'
+  url: 'https://pfpokabiphsyjkkkdslc.supabase.co',
+  publishableKey: 'sb_publishable_ZdugskTG-x76pAF0vFmArg_SPPCIZy9'
 };
